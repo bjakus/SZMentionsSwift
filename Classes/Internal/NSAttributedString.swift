@@ -67,9 +67,12 @@ internal func apply(attributes: @escaping (CreateMention?) -> [AttributeContaine
 internal func replace(charactersIn range: NSRange,
                       with text: String) -> (NSAttributedString) -> (NSAttributedString, NSRange) {
     return { string in
+        let newtext = "@" + text
+        var newrange = range
+        //        newrange.location = anewrange.location
         let attributedText = string.mutableAttributedText
-        attributedText.mutableString.replaceCharacters(in: range, with: text)
-        let selectedRange = NSRange(location: range.location + text.utf16.count, length: 0)
+        attributedText.mutableString.replaceCharacters(in: newrange, with: newtext)
+        let selectedRange = NSRange(location: newrange.location + newtext.utf16.count, length: 0)
 
         return (attributedText, selectedRange)
     }
