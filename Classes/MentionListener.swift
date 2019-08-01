@@ -334,6 +334,10 @@ extension MentionListener: UITextViewDelegate {
 
         var shouldChangeText = true
 
+        if range.length == 0 || !text.contains("@") {
+            return true
+        }
+        
         if text == "\n", mentionEnabled, didHandleMentionOnReturn() {
             // If mentions were handled on return then `addMention` should've been called.
             // Nothing to do here.
